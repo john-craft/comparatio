@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<head>
+  <script>
+    function compare() {
+      let el = document.querySelector('div.original textarea')
+
+      if (el.value.length > 0) {
+        let original = el.value.split(' ').sort();
+
+        listItems = original.reduce((result, item) => {
+          result += `<li>${item}</li>`;
+          return result;
+        }, '');
+
+        let output = document.querySelector('div.result div')
+
+        output.innerHTML = '<ul>' + listItems + '</ul>';
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <div class="original">
+    <h2>Original</h2>
+    <textarea rows="10" cols="50"></textarea>
+  </div>
+  <div class="modified">
+    <h2>Comparison</h2>
+  </div>
+  <div><button onclick="compare()">Compare</button></div>
+  <div class="result">
+    <h2>Result</h2>
+    <div></div>
+  </div>
+</body>
