@@ -3,35 +3,76 @@
 <head>
   <script>
     function compare() {
-      let el = document.querySelector('div.original textarea')
+      let elOriginal = document.querySelector('div.left textarea')
+      let elModified = document.querySelector('div.right textarea')
 
-      if (el.value.length > 0) {
-        let original = el.value.split(' ').sort();
+      if (elOriginal.value.length > 0 && elModified.value.length) {
+        let original = elOriginal.value.split(' ').sort();
+        let modified = elModified.value.split(' ').sort();
 
-        listItems = original.reduce((result, item) => {
+        originalListItems = original.reduce((result, item) => {
           result += `<li>${item}</li>`;
           return result;
         }, '');
 
-        let output = document.querySelector('div.result div')
+        modifiedListItems = modified.reduce((result, item) => {
+          result += `<li>${item}</li>`;
+          return result;
+        }, '');
 
-        output.innerHTML = '<ul>' + listItems + '</ul>';
+        let originalOutput = document.querySelector('div.result div.original')
+        let modifiedOutput = document.querySelector('div.result div.modified')
+
+        originalOutput.innerHTML = '<ul>' + originalListItems + '</ul>';
+        modifiedOutput.innerHTML = '<ul>' + modifiedListItems + '</ul>';
       }
     }
   </script>
+  <style>
+    .container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 10px;
+      grid-auto-rows: minmax(100px, auto);
+    }
+
+    .container .left {
+      grid-column: 1 / 3;
+      grid-row: 1;
+    }
+
+    .container .right {
+      grid-column: 2 / 4;
+      grid-row: 1 / 3;
+    }
+
+    .container .original {
+      grid-column: 2 / 4;
+      grid-row: 1 / 3;
+    }
+
+    .container .modified {
+      grid-column: 2 / 4;
+      grid-row: 1 / 3;
+    }
+  </style>
 </head>
 
 <body>
-  <div class="original">
-    <h2>Original</h2>
-    <textarea rows="10" cols="50"></textarea>
-  </div>
-  <div class="modified">
-    <h2>Comparison</h2>
-  </div>
-  <div><button onclick="compare()">Compare</button></div>
-  <div class="result">
-    <h2>Result</h2>
-    <div></div>
+  <div class="container">
+    <div class="left">
+      <h2>Original</h2>
+      <textarea rows="10" cols="50"></textarea>
+    </div>
+    <div class="right">
+      <h2>Comparison</h2>
+      <textarea rows="10" cols="50"></textarea>
+    </div>
+    <div><button onclick="compare()">Compare</button></div>
+    <div class="result">
+      <h2>Result</h2>
+      <div class="original"></div>
+      <div class="modified"></div>
+    </div>
   </div>
 </body>
