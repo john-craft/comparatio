@@ -20,8 +20,8 @@
           return result;
         }, '');
 
-        let originalOutput = document.querySelector('div.result div.original')
-        let modifiedOutput = document.querySelector('div.result div.modified')
+        let originalOutput = document.querySelector('div.original-result div')
+        let modifiedOutput = document.querySelector('div.modified-result div')
 
         originalOutput.innerHTML = '<ul>' + originalListItems + '</ul>';
         modifiedOutput.innerHTML = '<ul>' + modifiedListItems + '</ul>';
@@ -32,8 +32,6 @@
     .container {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      grid-gap: 10px;
-      grid-auto-rows: minmax(100px, auto);
     }
 
     .container .left {
@@ -46,14 +44,14 @@
       grid-row: 1 / 3;
     }
 
-    .container .original {
-      grid-column: 2 / 4;
-      grid-row: 1 / 3;
+    .container .original-result {
+      grid-column: 1 / 3;
+      grid-row: 2;
     }
 
-    .container .modified {
+    .container .modified-result {
       grid-column: 2 / 4;
-      grid-row: 1 / 3;
+      grid-row: 2;
     }
   </style>
 </head>
@@ -69,10 +67,13 @@
       <textarea rows="10" cols="50"></textarea>
     </div>
     <div><button onclick="compare()">Compare</button></div>
-    <div class="result">
+    <div class="original-result">
       <h2>Result</h2>
-      <div class="original"></div>
-      <div class="modified"></div>
+      <div></div>
+    </div>
+    <div class="modified-result">
+      <h2>Result</h2>
+      <div></div>
     </div>
   </div>
 </body>
